@@ -12,8 +12,8 @@ int Tbubble :: active_strims_num = 0;
 // ----------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------
-// Начать отрисовку потока пузырька
-// time - время в циклах самовара
+// РќР°С‡Р°С‚СЊ РѕС‚СЂРёСЃРѕРІРєСѓ РїРѕС‚РѕРєР° РїСѓР·С‹СЂСЊРєР°
+// time - РІСЂРµРјСЏ РІ С†РёРєР»Р°С… СЃР°РјРѕРІР°СЂР°
 // ----------------------------------------------------------------------------
 void Tbubble :: start_strim(int style_depended_delta, int start_coord)
 {
@@ -28,16 +28,16 @@ void Tbubble :: start_strim(int style_depended_delta, int start_coord)
 }
 
 // ----------------------------------------------------------------------------
-// Рассчитать число активных потоков пузырьков
-// temp         температура воды
-// q_heating    количество теплоты подводимое к ней
+// Р Р°СЃСЃС‡РёС‚Р°С‚СЊ С‡РёСЃР»Рѕ Р°РєС‚РёРІРЅС‹С… РїРѕС‚РѕРєРѕРІ РїСѓР·С‹СЂСЊРєРѕРІ
+// temp         С‚РµРјРїРµСЂР°С‚СѓСЂР° РІРѕРґС‹
+// q_heating    РєРѕР»РёС‡РµСЃС‚РІРѕ С‚РµРїР»РѕС‚С‹ РїРѕРґРІРѕРґРёРјРѕРµ Рє РЅРµР№
 // ----------------------------------------------------------------------------
 int Tbubble :: active_strims_calc(float temp, float q_heating)
 {
     if(temp < MIN_TEMPER_BUBBLES_PROCESS)
-        return 0;         //прохладновато для образования новых булек
-    float tmp = temp * MAX_BUBBLES_STRIMS * TEMPER_BUBBLES_PART / Twater_obj :: T_MAX;              //составляющая от температуры воды в резервуаре
-    float tmp1 = q_heating * MAX_BUBBLES_STRIMS * (1 - TEMPER_BUBBLES_PART) / SAMOVAR_MAX_HEATING;  //составляющая от количества теплоты подводимого к ней
+        return 0;         //РїСЂРѕС…Р»Р°РґРЅРѕРІР°С‚Рѕ РґР»СЏ РѕР±СЂР°Р·РѕРІР°РЅРёСЏ РЅРѕРІС‹С… Р±СѓР»РµРє
+    float tmp = temp * MAX_BUBBLES_STRIMS * TEMPER_BUBBLES_PART / Twater_obj :: T_MAX;              //СЃРѕСЃС‚Р°РІР»СЏСЋС‰Р°СЏ РѕС‚ С‚РµРјРїРµСЂР°С‚СѓСЂС‹ РІРѕРґС‹ РІ СЂРµР·РµСЂРІСѓР°СЂРµ
+    float tmp1 = q_heating * MAX_BUBBLES_STRIMS * (1 - TEMPER_BUBBLES_PART) / SAMOVAR_MAX_HEATING;  //СЃРѕСЃС‚Р°РІР»СЏСЋС‰Р°СЏ РѕС‚ РєРѕР»РёС‡РµСЃС‚РІР° С‚РµРїР»РѕС‚С‹ РїРѕРґРІРѕРґРёРјРѕРіРѕ Рє РЅРµР№
     int rez = (int)(tmp + tmp1);
     if(rez > MAX_BUBBLES_STRIMS)
         return MAX_BUBBLES_STRIMS;
@@ -46,7 +46,7 @@ int Tbubble :: active_strims_calc(float temp, float q_heating)
 }
 
 // ----------------------------------------------------------------------------
-// содержится ли такое число в массиве
+// СЃРѕРґРµСЂР¶РёС‚СЃСЏ Р»Рё С‚Р°РєРѕРµ С‡РёСЃР»Рѕ РІ РјР°СЃСЃРёРІРµ
 // ----------------------------------------------------------------------------
 /*bool is_contein_val(int* ind_ptr, int val, int ctr)
 {
@@ -61,13 +61,13 @@ int Tbubble :: active_strims_calc(float temp, float q_heating)
 int ind[MAX_BUBBLES_STRIMS];
 */
 // ----------------------------------------------------------------------------
-// сгенерировать потоки пузырьков
+// СЃРіРµРЅРµСЂРёСЂРѕРІР°С‚СЊ РїРѕС‚РѕРєРё РїСѓР·С‹СЂСЊРєРѕРІ
 // ----------------------------------------------------------------------------
 void Tbubble :: generat_bubbles(float temp, float q_heating)
 {
     int active_strims_tmp = active_strims_calc(temp, q_heating);
     if(active_strims_num >= active_strims_tmp)
-        return;         //новых булек боле не надо
+        return;         //РЅРѕРІС‹С… Р±СѓР»РµРє Р±РѕР»Рµ РЅРµ РЅР°РґРѕ
 /*    for(int i = 0; i < active_strims_tmp; ++i)
     {
         int tt = 1 + rand() % active_strims_tmp;
@@ -87,8 +87,8 @@ void Tbubble :: generat_bubbles(float temp, float q_heating)
     }
 }
 // ----------------------------------------------------------------------------
-// рассчитать на какой строке горит светодиод
-// 0 - нижняя строка
+// СЂР°СЃСЃС‡РёС‚Р°С‚СЊ РЅР° РєР°РєРѕР№ СЃС‚СЂРѕРєРµ РіРѕСЂРёС‚ СЃРІРµС‚РѕРґРёРѕРґ
+// 0 - РЅРёР¶РЅСЏСЏ СЃС‚СЂРѕРєР°
 // ----------------------------------------------------------------------------
 unsigned int Tbubble :: calc_line_led(unsigned int num_led)
 {
@@ -102,8 +102,8 @@ unsigned int Tbubble :: calc_line_led(unsigned int num_led)
 }
 
 // ----------------------------------------------------------------------------
-// рассчитать новый пиксель пузырька
-// max_line_container_light - номер последней светящейся линии в контейнере
+// СЂР°СЃСЃС‡РёС‚Р°С‚СЊ РЅРѕРІС‹Р№ РїРёРєСЃРµР»СЊ РїСѓР·С‹СЂСЊРєР°
+// max_line_container_light - РЅРѕРјРµСЂ РїРѕСЃР»РµРґРЅРµР№ СЃРІРµС‚СЏС‰РµР№СЃСЏ Р»РёРЅРёРё РІ РєРѕРЅС‚РµР№РЅРµСЂРµ
 // ----------------------------------------------------------------------------
 void Tbubble :: calc_new_pixel_bubble(unsigned int max_line_container_light)
 {
@@ -111,13 +111,13 @@ void Tbubble :: calc_new_pixel_bubble(unsigned int max_line_container_light)
     unsigned int num_line_tmp;
     
     if(num_line >= (SAMOVAR_LED_LINE - 1))
-    {   // горит посл строка. Нефиг дальше лезть.
+    {   // РіРѕСЂРёС‚ РїРѕСЃР» СЃС‚СЂРѕРєР°. РќРµС„РёРі РґР°Р»СЊС€Рµ Р»РµР·С‚СЊ.
         active_strims_num--;
         is_enable = false;
         return;
     }
     if(num_line > (max_line_container_light - 1))
-    {   // над поверхностью жижи может гореть только один слой пузырьков.
+    {   // РЅР°Рґ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊСЋ Р¶РёР¶Рё РјРѕР¶РµС‚ РіРѕСЂРµС‚СЊ С‚РѕР»СЊРєРѕ РѕРґРёРЅ СЃР»РѕР№ РїСѓР·С‹СЂСЊРєРѕРІ.
         active_strims_num--;
         is_enable = false;
         return;
@@ -125,13 +125,13 @@ void Tbubble :: calc_new_pixel_bubble(unsigned int max_line_container_light)
     tmp = current_led + ADD_TBL[num_line];
     num_line_tmp = calc_line_led(tmp);
     if(num_line_tmp == num_line)
-    {   // Булька дошла до лев верх закругления. Нефиг дальше лезть.
+    {   // Р‘СѓР»СЊРєР° РґРѕС€Р»Р° РґРѕ Р»РµРІ РІРµСЂС… Р·Р°РєСЂСѓРіР»РµРЅРёСЏ. РќРµС„РёРі РґР°Р»СЊС€Рµ Р»РµР·С‚СЊ.
         active_strims_num--;
         is_enable = false;
         return;
     }
     if((num_line_tmp - num_line) > 1)
-    {   // Булька дошла до прав верх закругления. Нефиг дальше лезть.
+    {   // Р‘СѓР»СЊРєР° РґРѕС€Р»Р° РґРѕ РїСЂР°РІ РІРµСЂС… Р·Р°РєСЂСѓРіР»РµРЅРёСЏ. РќРµС„РёРі РґР°Р»СЊС€Рµ Р»РµР·С‚СЊ.
         active_strims_num--;
         is_enable = false;
         return;
@@ -148,9 +148,9 @@ void Tbubble :: calc_new_pixel_bubble(unsigned int max_line_container_light)
     }
 }
 // ----------------------------------------------------------------------------
-// Отрисовать пузырёк
-// Вызывать из цикла самовара. Для временных выдержек
-// num_led - число светодиодов в объекте
+// РћС‚СЂРёСЃРѕРІР°С‚СЊ РїСѓР·С‹СЂС‘Рє
+// Р’С‹Р·С‹РІР°С‚СЊ РёР· С†РёРєР»Р° СЃР°РјРѕРІР°СЂР°. Р”Р»СЏ РІСЂРµРјРµРЅРЅС‹С… РІС‹РґРµСЂР¶РµРє
+// num_led - С‡РёСЃР»Рѕ СЃРІРµС‚РѕРґРёРѕРґРѕРІ РІ РѕР±СЉРµРєС‚Рµ
 // ----------------------------------------------------------------------------
 void Tbubble :: drow_bubble(unsigned int max_line_container_light, Tled_color* leds, unsigned int num_led)
 {
@@ -159,15 +159,15 @@ void Tbubble :: drow_bubble(unsigned int max_line_container_light, Tled_color* l
     --cycle_time_ctr;
     if(cycle_time_ctr > 0)
         return;
-    cycle_time_ctr = Tbubble :: cycle_time;                      // периодичность обслуживания этой сущности
+    cycle_time_ctr = Tbubble :: cycle_time;                      // РїРµСЂРёРѕРґРёС‡РЅРѕСЃС‚СЊ РѕР±СЃР»СѓР¶РёРІР°РЅРёСЏ СЌС‚РѕР№ СЃСѓС‰РЅРѕСЃС‚Рё
     int led_prep;
     if(num_line & 1)
-    {   //если не четная строка, зеркальнуть ее
+    {   //РµСЃР»Рё РЅРµ С‡РµС‚РЅР°СЏ СЃС‚СЂРѕРєР°, Р·РµСЂРєР°Р»СЊРЅСѓС‚СЊ РµРµ
         led_prep = SAMOVAR_LED_VS_NUMBER_LINE_TBL[num_line] + SAMOVAR_LED_PER_LINE_TBL[num_line] + 1 - current_led + SAMOVAR_LED_VS_NUMBER_LINE_TBL[num_line];
     }
     else
         led_prep = current_led;
-  //  здесь нарисовать пиксель в тело самовара
+  //  Р·РґРµСЃСЊ РЅР°СЂРёСЃРѕРІР°С‚СЊ РїРёРєСЃРµР»СЊ РІ С‚РµР»Рѕ СЃР°РјРѕРІР°СЂР°
 #ifdef IZVRAT_MIRROR_LEDS
    // (leds + num_led - current_led)->val.v = brite + 1;
     (leds + num_led - led_prep)->val.v = brite + 1;

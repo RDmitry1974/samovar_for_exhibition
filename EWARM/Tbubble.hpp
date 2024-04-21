@@ -8,12 +8,12 @@ class Tled_color;
 
 struct Tstart_coordinate
 {
-    int begin_led;                              // физический номер первого СД в объекте (с него пузырек начнет свое движение вверх)
-    int start_line;                             // номер строки контейнера первого СД
+    int begin_led;                              // С„РёР·РёС‡РµСЃРєРёР№ РЅРѕРјРµСЂ РїРµСЂРІРѕРіРѕ РЎР” РІ РѕР±СЉРµРєС‚Рµ (СЃ РЅРµРіРѕ РїСѓР·С‹СЂРµРє РЅР°С‡РЅРµС‚ СЃРІРѕРµ РґРІРёР¶РµРЅРёРµ РІРІРµСЂС…)
+    int start_line;                             // РЅРѕРјРµСЂ СЃС‚СЂРѕРєРё РєРѕРЅС‚РµР№РЅРµСЂР° РїРµСЂРІРѕРіРѕ РЎР”
 };
 
 // ----------------------------------------------------------------------------
-// Пузырьки
+// РџСѓР·С‹СЂСЊРєРё
 // ----------------------------------------------------------------------------
 class Tbubble
 {
@@ -26,25 +26,25 @@ public:
         is_enable = false;
         style_depended_delta = 0;
     }
-//    static const unsigned int MAX_BUBBLES_STRIMS = 15;                        // максимальное число потоков пузырьков
+//    static const unsigned int MAX_BUBBLES_STRIMS = 15;                        // РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ С‡РёСЃР»Рѕ РїРѕС‚РѕРєРѕРІ РїСѓР·С‹СЂСЊРєРѕРІ
     
-    static const unsigned short ADD_TBL[];      // таблица смещения для перехода на следующую строку для формирования верт линии
-    static void generat_bubbles(float temp, float q_heating);                   // сгенерировать потоки пузырьков   
-    void drow_bubble(unsigned int max_line_container_light, Tled_color* leds, unsigned int num_led);  // отрисовать пузырёк
-    void start_strim(int style_depended_delta, int start_coord);                // начать отрисовку потока пузырька
+    static const unsigned short ADD_TBL[];      // С‚Р°Р±Р»РёС†Р° СЃРјРµС‰РµРЅРёСЏ РґР»СЏ РїРµСЂРµС…РѕРґР° РЅР° СЃР»РµРґСѓСЋС‰СѓСЋ СЃС‚СЂРѕРєСѓ РґР»СЏ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РІРµСЂС‚ Р»РёРЅРёРё
+    static void generat_bubbles(float temp, float q_heating);                   // СЃРіРµРЅРµСЂРёСЂРѕРІР°С‚СЊ РїРѕС‚РѕРєРё РїСѓР·С‹СЂСЊРєРѕРІ   
+    void drow_bubble(unsigned int max_line_container_light, Tled_color* leds, unsigned int num_led);  // РѕС‚СЂРёСЃРѕРІР°С‚СЊ РїСѓР·С‹СЂС‘Рє
+    void start_strim(int style_depended_delta, int start_coord);                // РЅР°С‡Р°С‚СЊ РѕС‚СЂРёСЃРѕРІРєСѓ РїРѕС‚РѕРєР° РїСѓР·С‹СЂСЊРєР°
 private:
-    static int cycle_time;                      // время переключения пузырька в мс
-    static int active_strims_num;               // число активных потоков пузырька от 0 до MAX_BUBBLES_STRIMS
-    static int active_strims_calc(float temp, float q_heating);                        // Рассчитать число активных потоков пузырьков
-//    int begin_led;                              // физический номер первого СД в объекте (с него пузырек начнет свое движение вверх)
-//    int start_line;                             // номер строки контейнера первого СД
-    int current_led;                            // физический номер зажженого СД
-    int cycle_time_ctr;                         // счетчик времени переключения пузырька в мс
-    bool is_enable;                             // работает (отрисовывается) этот поток пузырька
-    int style_depended_delta;                   // направление закручивания потока пузырька (-1, 0 или +1)
-    unsigned int num_line;                      // номер текущей строки
-    unsigned int calc_line_led(unsigned int num_led);   // рассчитать на какой строке горит светодиод
-    void calc_new_pixel_bubble(unsigned int max_line_container_light);          // рассчитать новый пиксель пузырька
+    static int cycle_time;                      // РІСЂРµРјСЏ РїРµСЂРµРєР»СЋС‡РµРЅРёСЏ РїСѓР·С‹СЂСЊРєР° РІ РјСЃ
+    static int active_strims_num;               // С‡РёСЃР»Рѕ Р°РєС‚РёРІРЅС‹С… РїРѕС‚РѕРєРѕРІ РїСѓР·С‹СЂСЊРєР° РѕС‚ 0 РґРѕ MAX_BUBBLES_STRIMS
+    static int active_strims_calc(float temp, float q_heating);                        // Р Р°СЃСЃС‡РёС‚Р°С‚СЊ С‡РёСЃР»Рѕ Р°РєС‚РёРІРЅС‹С… РїРѕС‚РѕРєРѕРІ РїСѓР·С‹СЂСЊРєРѕРІ
+//    int begin_led;                              // С„РёР·РёС‡РµСЃРєРёР№ РЅРѕРјРµСЂ РїРµСЂРІРѕРіРѕ РЎР” РІ РѕР±СЉРµРєС‚Рµ (СЃ РЅРµРіРѕ РїСѓР·С‹СЂРµРє РЅР°С‡РЅРµС‚ СЃРІРѕРµ РґРІРёР¶РµРЅРёРµ РІРІРµСЂС…)
+//    int start_line;                             // РЅРѕРјРµСЂ СЃС‚СЂРѕРєРё РєРѕРЅС‚РµР№РЅРµСЂР° РїРµСЂРІРѕРіРѕ РЎР”
+    int current_led;                            // С„РёР·РёС‡РµСЃРєРёР№ РЅРѕРјРµСЂ Р·Р°Р¶Р¶РµРЅРѕРіРѕ РЎР”
+    int cycle_time_ctr;                         // СЃС‡РµС‚С‡РёРє РІСЂРµРјРµРЅРё РїРµСЂРµРєР»СЋС‡РµРЅРёСЏ РїСѓР·С‹СЂСЊРєР° РІ РјСЃ
+    bool is_enable;                             // СЂР°Р±РѕС‚Р°РµС‚ (РѕС‚СЂРёСЃРѕРІС‹РІР°РµС‚СЃСЏ) СЌС‚РѕС‚ РїРѕС‚РѕРє РїСѓР·С‹СЂСЊРєР°
+    int style_depended_delta;                   // РЅР°РїСЂР°РІР»РµРЅРёРµ Р·Р°РєСЂСѓС‡РёРІР°РЅРёСЏ РїРѕС‚РѕРєР° РїСѓР·С‹СЂСЊРєР° (-1, 0 РёР»Рё +1)
+    unsigned int num_line;                      // РЅРѕРјРµСЂ С‚РµРєСѓС‰РµР№ СЃС‚СЂРѕРєРё
+    unsigned int calc_line_led(unsigned int num_led);   // СЂР°СЃСЃС‡РёС‚Р°С‚СЊ РЅР° РєР°РєРѕР№ СЃС‚СЂРѕРєРµ РіРѕСЂРёС‚ СЃРІРµС‚РѕРґРёРѕРґ
+    void calc_new_pixel_bubble(unsigned int max_line_container_light);          // СЂР°СЃСЃС‡РёС‚Р°С‚СЊ РЅРѕРІС‹Р№ РїРёРєСЃРµР»СЊ РїСѓР·С‹СЂСЊРєР°
 };
 
 #endif

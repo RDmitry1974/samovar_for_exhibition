@@ -56,9 +56,9 @@ extern "C" {
 #define     K_LOST_CUP           -0.1
 #define     V_MAX_SAMOVAR        100.0
 #define     V_MAX_CUP            10.0
-//объем за квант времени поступающей жидкости
+//РѕР±СЉРµРј Р·Р° РєРІР°РЅС‚ РІСЂРµРјРµРЅРё РїРѕСЃС‚СѓРїР°СЋС‰РµР№ Р¶РёРґРєРѕСЃС‚Рё
 #define     V_INP_SAMOVAR        (V_MAX_SAMOVAR / 3000)
-//объем за квант времени убывающей жидкости
+//РѕР±СЉРµРј Р·Р° РєРІР°РЅС‚ РІСЂРµРјРµРЅРё СѓР±С‹РІР°СЋС‰РµР№ Р¶РёРґРєРѕСЃС‚Рё
 //#define     V_OUT_SAMOVAR        (V_MAX_SAMOVAR / 10000)
 #define     V_OUT_SAMOVAR        (V_MAX_SAMOVAR / 3000)
 #define     V_INP_CUP            V_OUT_SAMOVAR
@@ -72,9 +72,9 @@ extern "C" {
 #define     SAMOVAR_MAX_HEATING  75.0
 #define     MAX_BUBBLES_STRIMS   15
 #define     MIN_TEMPER_BUBBLES_PROCESS   50.0
-//в максимальном кол-ве пузырьков часть приходящаяся на температурную составляющую
+//РІ РјР°РєСЃРёРјР°Р»СЊРЅРѕРј РєРѕР»-РІРµ РїСѓР·С‹СЂСЊРєРѕРІ С‡Р°СЃС‚СЊ РїСЂРёС…РѕРґСЏС‰Р°СЏСЃСЏ РЅР° С‚РµРјРїРµСЂР°С‚СѓСЂРЅСѓСЋ СЃРѕСЃС‚Р°РІР»СЏСЋС‰СѓСЋ
 #define     TEMPER_BUBBLES_PART   (1/3)
-    // периодичность  основного цикла в мс
+    // РїРµСЂРёРѕРґРёС‡РЅРѕСЃС‚СЊ  РѕСЃРЅРѕРІРЅРѕРіРѕ С†РёРєР»Р° РІ РјСЃ
 #define     MAIN_CYCLE_TIME      10
 extern const unsigned short SAMOVAR_LED_PER_LINE_TBL[];    
 extern const unsigned short SAMOVAR_LED_VS_NUMBER_LINE_TBL[];    

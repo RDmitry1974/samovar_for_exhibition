@@ -68,41 +68,41 @@ static void MX_DAC_Init(void);
 
 
 // ----------------------------------------------------------------------------
-const unsigned short CUP_LED_PER_LINE_TBL[] = {0, 5, 11, 17};    //количество СИД в строчках изображения чашки (нарасающим итогом)
-const unsigned short SAMOVAR_LED_PER_LINE_TBL[] = {5, 9, 13, 15, 15, 17, 17, 19, 19, 19, 19, 17, 17, 15, 15, 13, 9};    //количество СИД в строчках изображения самовара
-const unsigned short SAMOVAR_LED_VS_NUMBER_LINE_TBL[] = {0, 5, 14, 27, 42, 57, 74, 91, 110, 129, 148, 167, 184, 201, 216, 231, 244, 253};    //количество СИД самовара в зависимости от номера строки 
+const unsigned short CUP_LED_PER_LINE_TBL[] = {0, 5, 11, 17};    //РєРѕР»РёС‡РµСЃС‚РІРѕ РЎРР” РІ СЃС‚СЂРѕС‡РєР°С… РёР·РѕР±СЂР°Р¶РµРЅРёСЏ С‡Р°С€РєРё (РЅР°СЂР°СЃР°СЋС‰РёРј РёС‚РѕРіРѕРј)
+const unsigned short SAMOVAR_LED_PER_LINE_TBL[] = {5, 9, 13, 15, 15, 17, 17, 19, 19, 19, 19, 17, 17, 15, 15, 13, 9};    //РєРѕР»РёС‡РµСЃС‚РІРѕ РЎРР” РІ СЃС‚СЂРѕС‡РєР°С… РёР·РѕР±СЂР°Р¶РµРЅРёСЏ СЃР°РјРѕРІР°СЂР°
+const unsigned short SAMOVAR_LED_VS_NUMBER_LINE_TBL[] = {0, 5, 14, 27, 42, 57, 74, 91, 110, 129, 148, 167, 184, 201, 216, 231, 244, 253};    //РєРѕР»РёС‡РµСЃС‚РІРѕ РЎРР” СЃР°РјРѕРІР°СЂР° РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РЅРѕРјРµСЂР° СЃС‚СЂРѕРєРё 
 
 #ifdef IZVRAT_MIRROR_LEDS
-// Облажался с ключем на светодиодах. Исправил перемычками на плате. Придется править прошивкой.
-Tcontainer samovar_led = Tcontainer(0, 253, SAMOVAR_LED_LINE, V_MAX_SAMOVAR, SAMOVAR_LED_VS_NUMBER_LINE_TBL, true);     // СИД. Самовар
-Tcontainer cup_led = Tcontainer(253, 17, CUP_LED_LINE, V_MAX_CUP, CUP_LED_PER_LINE_TBL, false);                    // СИД. Чашка
-Tstreamlet out_streamlet = Tstreamlet(270, 15);     // СИД. Выходной поток
-// СИД. Угли идут статическим классом
-Tstreamlet input_streamlet = Tstreamlet(292, 6);    // СИД. Входной поток
+// РћР±Р»Р°Р¶Р°Р»СЃСЏ СЃ РєР»СЋС‡РµРј РЅР° СЃРІРµС‚РѕРґРёРѕРґР°С…. РСЃРїСЂР°РІРёР» РїРµСЂРµРјС‹С‡РєР°РјРё РЅР° РїР»Р°С‚Рµ. РџСЂРёРґРµС‚СЃСЏ РїСЂР°РІРёС‚СЊ РїСЂРѕС€РёРІРєРѕР№.
+Tcontainer samovar_led = Tcontainer(0, 253, SAMOVAR_LED_LINE, V_MAX_SAMOVAR, SAMOVAR_LED_VS_NUMBER_LINE_TBL, true);     // РЎРР”. РЎР°РјРѕРІР°СЂ
+Tcontainer cup_led = Tcontainer(253, 17, CUP_LED_LINE, V_MAX_CUP, CUP_LED_PER_LINE_TBL, false);                    // РЎРР”. Р§Р°С€РєР°
+Tstreamlet out_streamlet = Tstreamlet(270, 15);     // РЎРР”. Р’С‹С…РѕРґРЅРѕР№ РїРѕС‚РѕРє
+// РЎРР”. РЈРіР»Рё РёРґСѓС‚ СЃС‚Р°С‚РёС‡РµСЃРєРёРј РєР»Р°СЃСЃРѕРј
+Tstreamlet input_streamlet = Tstreamlet(292, 6);    // РЎРР”. Р’С…РѕРґРЅРѕР№ РїРѕС‚РѕРє
 #else
 
-Tstreamlet input_streamlet = Tstreamlet(0, 6);      // СИД. Входной поток
-// СИД. Угли идут статическим классом
-Tstreamlet out_streamlet = Tstreamlet(13, 15);      // СИД. Выходной поток
-Tcup_led cup_led = Tcup_led(28, 17);                // СИД. Чашка
-Tsamovar_led samovar_led = Tsamovar_led(45, 253);   // СИД. Самовар
+Tstreamlet input_streamlet = Tstreamlet(0, 6);      // РЎРР”. Р’С…РѕРґРЅРѕР№ РїРѕС‚РѕРє
+// РЎРР”. РЈРіР»Рё РёРґСѓС‚ СЃС‚Р°С‚РёС‡РµСЃРєРёРј РєР»Р°СЃСЃРѕРј
+Tstreamlet out_streamlet = Tstreamlet(13, 15);      // РЎРР”. Р’С‹С…РѕРґРЅРѕР№ РїРѕС‚РѕРє
+Tcup_led cup_led = Tcup_led(28, 17);                // РЎРР”. Р§Р°С€РєР°
+Tsamovar_led samovar_led = Tsamovar_led(45, 253);   // РЎРР”. РЎР°РјРѕРІР°СЂ
 #endif
 
 
 
-const int Twater_obj :: T_MIN = 20.0;               //начальная температура жидкости. Она же для поступающей жидкости
-const int Twater_obj :: T_MAX = 100.0;              //начальная температура жидкости. Она же для поступающей жидкости
-const float Twater_obj :: C_WATER = 20.0;           //удельная теплоемкость жидкости
-const float Twater_obj :: DELTA_TEMP = 0.1;         //скорость остывания жидкости( градусов на квант времени)
+const int Twater_obj :: T_MIN = 20.0;               //РЅР°С‡Р°Р»СЊРЅР°СЏ С‚РµРјРїРµСЂР°С‚СѓСЂР° Р¶РёРґРєРѕСЃС‚Рё. РћРЅР° Р¶Рµ РґР»СЏ РїРѕСЃС‚СѓРїР°СЋС‰РµР№ Р¶РёРґРєРѕСЃС‚Рё
+const int Twater_obj :: T_MAX = 100.0;              //РЅР°С‡Р°Р»СЊРЅР°СЏ С‚РµРјРїРµСЂР°С‚СѓСЂР° Р¶РёРґРєРѕСЃС‚Рё. РћРЅР° Р¶Рµ РґР»СЏ РїРѕСЃС‚СѓРїР°СЋС‰РµР№ Р¶РёРґРєРѕСЃС‚Рё
+const float Twater_obj :: C_WATER = 20.0;           //СѓРґРµР»СЊРЅР°СЏ С‚РµРїР»РѕРµРјРєРѕСЃС‚СЊ Р¶РёРґРєРѕСЃС‚Рё
+const float Twater_obj :: DELTA_TEMP = 0.1;         //СЃРєРѕСЂРѕСЃС‚СЊ РѕСЃС‚С‹РІР°РЅРёСЏ Р¶РёРґРєРѕСЃС‚Рё( РіСЂР°РґСѓСЃРѕРІ РЅР° РєРІР°РЅС‚ РІСЂРµРјРµРЅРё)
 Twater_obj samovar = Twater_obj(K_LOST_SAMOVAR, V_MAX_SAMOVAR, V_INP_SAMOVAR, V_OUT_SAMOVAR);
 Twater_obj cup =     Twater_obj(K_LOST_CUP, V_MAX_CUP, V_INP_CUP, V_OUT_CUP);
-bool is_input_valve_open = false;                   // открыт ли входной клапан
-bool is_output_valve_open = false;                  // открыт ли выходной клапан (нажата ли кнопка "Налить")
-bool is_cup_sink = false;                           // нажата ли кнопка "Испить"
-float q_samovar_heating = 0;                        // кол. теплоты подводимое к самовару
+bool is_input_valve_open = false;                   // РѕС‚РєСЂС‹С‚ Р»Рё РІС…РѕРґРЅРѕР№ РєР»Р°РїР°РЅ
+bool is_output_valve_open = false;                  // РѕС‚РєСЂС‹С‚ Р»Рё РІС‹С…РѕРґРЅРѕР№ РєР»Р°РїР°РЅ (РЅР°Р¶Р°С‚Р° Р»Рё РєРЅРѕРїРєР° "РќР°Р»РёС‚СЊ")
+bool is_cup_sink = false;                           // РЅР°Р¶Р°С‚Р° Р»Рё РєРЅРѕРїРєР° "РСЃРїРёС‚СЊ"
+float q_samovar_heating = 0;                        // РєРѕР». С‚РµРїР»РѕС‚С‹ РїРѕРґРІРѕРґРёРјРѕРµ Рє СЃР°РјРѕРІР°СЂСѓ
 
 /*------------------------------------------------------------------------------
-  Ожидание наступления времени
+  РћР¶РёРґР°РЅРёРµ РЅР°СЃС‚СѓРїР»РµРЅРёСЏ РІСЂРµРјРµРЅРё
  ------------------------------------------------------------------------------*/
 unsigned int my_delay_until_ctr;
 void my_delay_until(void)
@@ -117,21 +117,21 @@ void my_delay_until(void)
     }
 }
 /*------------------------------------------------------------------------------
-  Timer2 генерирует импульсы на светодиодную полосу
-  Канал 3 таймера используется в режиме Compare с загрузкой по DMA регистра CCR3 для формирования битовых сигналов
+  Timer2 РіРµРЅРµСЂРёСЂСѓРµС‚ РёРјРїСѓР»СЊСЃС‹ РЅР° СЃРІРµС‚РѕРґРёРѕРґРЅСѓСЋ РїРѕР»РѕСЃСѓ
+  РљР°РЅР°Р» 3 С‚Р°Р№РјРµСЂР° РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ СЂРµР¶РёРјРµ Compare СЃ Р·Р°РіСЂСѓР·РєРѕР№ РїРѕ DMA СЂРµРіРёСЃС‚СЂР° CCR3 РґР»СЏ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ Р±РёС‚РѕРІС‹С… СЃРёРіРЅР°Р»РѕРІ
  ------------------------------------------------------------------------------*/
 void Timer2_init(void)
 {
     TIM_TypeDef *tim = TIM2;
     RCC_TypeDef *rcc = RCC;
 
-    rcc->APB1RSTR |= BIT(0);    // Сброс таймера 2
+    rcc->APB1RSTR |= BIT(0);    // РЎР±СЂРѕСЃ С‚Р°Р№РјРµСЂР° 2
     rcc->APB1RSTR &= ~BIT(0);   
-    rcc->APB1ENR |= BIT(0);     // Разрешаем тактирование таймера 2
+    rcc->APB1ENR |= BIT(0);     // Р Р°Р·СЂРµС€Р°РµРј С‚Р°РєС‚РёСЂРѕРІР°РЅРёРµ С‚Р°Р№РјРµСЂР° 2
     tim->CR1 = BIT(7);          // ARPE: Auto-reload preload enable | 1: TIMx_ARR register is buffered.
     tim->CR2 = 0;               
-    tim->PSC = 0;               // Предделитель генерирует частоту 16 МГц
-    tim->ARR = 41 - 1;          // Перегрузка таймера каждые 1.25 мкс
+    tim->PSC = 0;               // РџСЂРµРґРґРµР»РёС‚РµР»СЊ РіРµРЅРµСЂРёСЂСѓРµС‚ С‡Р°СЃС‚РѕС‚Сѓ 16 РњР“С†
+    tim->ARR = 41 - 1;          // РџРµСЂРµРіСЂСѓР·РєР° С‚Р°Р№РјРµСЂР° РєР°Р¶РґС‹Рµ 1.25 РјРєСЃ
     tim->CCMR1 = 0
  //              + LSHIFT(6, 4) // OC1M: Output compare 1 mode | 110: PWM mode 1 - In upcounting, channel 1 is active as long as TIMx_CNT<TIMx_CCR1 else inactive.
                + LSHIFT(7, 4) // OC1M: Output compare 1 mode | 111: PWM mode 2 - In upcounting, channel 1 is inactive as long as TIMx_CNT<TIMx_CCR1 else inactive.
@@ -141,24 +141,24 @@ void Timer2_init(void)
     ; 
     tim->CNT = 0;
     tim->CCR1 = 0;
-    tim->DIER = BIT(9);        // Bit 9 CC1DE: Capture/Compare 1 DMA request enable. Разрешаем запросы DMA
-    tim->CR1 |= BIT(0);         // Запускаем таймер
-    tim->CCER = BIT(0) | BIT(1);         // Разрешаем работы выхода, чтобы возникали сигналы для DMA
+    tim->DIER = BIT(9);        // Bit 9 CC1DE: Capture/Compare 1 DMA request enable. Р Р°Р·СЂРµС€Р°РµРј Р·Р°РїСЂРѕСЃС‹ DMA
+    tim->CR1 |= BIT(0);         // Р—Р°РїСѓСЃРєР°РµРј С‚Р°Р№РјРµСЂ
+    tim->CCER = BIT(0) | BIT(1);         // Р Р°Р·СЂРµС€Р°РµРј СЂР°Р±РѕС‚С‹ РІС‹С…РѕРґР°, С‡С‚РѕР±С‹ РІРѕР·РЅРёРєР°Р»Рё СЃРёРіРЅР°Р»С‹ РґР»СЏ DMA
 }
 
 /*------------------------------------------------------------------------------
-  Инициализация канала 5 DMA1 Stream 7
-  Используется для пересылки шаблоной битов потока управления светодиодной лентой на WS2812B в таймер TMR2 работающий в режиме генерации PWM 
+  РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РєР°РЅР°Р»Р° 5 DMA1 Stream 7
+  РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ РїРµСЂРµСЃС‹Р»РєРё С€Р°Р±Р»РѕРЅРѕР№ Р±РёС‚РѕРІ РїРѕС‚РѕРєР° СѓРїСЂР°РІР»РµРЅРёСЏ СЃРІРµС‚РѕРґРёРѕРґРЅРѕР№ Р»РµРЅС‚РѕР№ РЅР° WS2812B РІ С‚Р°Р№РјРµСЂ TMR2 СЂР°Р±РѕС‚Р°СЋС‰РёР№ РІ СЂРµР¶РёРјРµ РіРµРЅРµСЂР°С†РёРё PWM 
  ------------------------------------------------------------------------------*/
 void DMA1_Stream7_Mem_to_TMR2_init(void)
 {
     DMA_Channel_TypeDef *dma_ch = DMA1_Channel5;
     RCC_TypeDef *rcc = RCC;
     
-    rcc->AHBENR |= BIT(0);               // Разрешаем DMA1
+    rcc->AHBENR |= BIT(0);               // Р Р°Р·СЂРµС€Р°РµРј DMA1
     
-    dma_ch->CCR = 0;    // Выключаем стрим
-    dma_ch->CPAR = (unsigned int)&(TIM2->CCR1);  // Назначаем адрес регистра данных 
+    dma_ch->CCR = 0;    // Р’С‹РєР»СЋС‡Р°РµРј СЃС‚СЂРёРј
+    dma_ch->CPAR = (unsigned int)&(TIM2->CCR1);  // РќР°Р·РЅР°С‡Р°РµРј Р°РґСЂРµСЃ СЂРµРіРёСЃС‚СЂР° РґР°РЅРЅС‹С… 
     dma_ch->CMAR = (unsigned long)&DMA_buf;
     dma_ch->CNDTR = (LEDS_NUM + 2) * COLRS * 8;
     dma_ch->CCR =
@@ -186,11 +186,11 @@ void DMA1_Stream7_Mem_to_TMR2_restart(void)
 {
     TIM_TypeDef *tim = TIM2;
     DMA_Channel_TypeDef *dma_ch = DMA1_Channel5;
-    tim->CR1 &= ~BIT(0);                            // Стопим таймер     
+    tim->CR1 &= ~BIT(0);                            // РЎС‚РѕРїРёРј С‚Р°Р№РјРµСЂ     
     dma_ch->CCR &= ~BIT(0);                         // Stream disabled
     dma_ch->CNDTR = (LEDS_NUM + 2) * COLRS * 8;
     dma_ch->CCR |= BIT(0);                          // Stream enabled
-    tim->CR1 |= BIT(0);                             // Запускаем таймер
+    tim->CR1 |= BIT(0);                             // Р—Р°РїСѓСЃРєР°РµРј С‚Р°Р№РјРµСЂ
 }
 
 /* USER CODE END 0 */
@@ -247,16 +247,16 @@ int main(void)
   /* USER CODE BEGIN WHILE */
     led_redraw_ctr = 10;
     adc_data = 0;
-//    samovar.v = V_MAX_SAMOVAR;  //фор тестовых прогонов
+//    samovar.v = V_MAX_SAMOVAR;  //С„РѕСЂ С‚РµСЃС‚РѕРІС‹С… РїСЂРѕРіРѕРЅРѕРІ
     while (1)
     {
-        my_delay_until();                                                       //ожидание начала следующего цикла
-        //эта часть кода выполняется раз в MAIN_CYCLE_TIME
-        while (!LL_ADC_IsActiveFlag_EOS(ADC1))                                  //дождаться окончания преобразования АЦП
+        my_delay_until();                                                       //РѕР¶РёРґР°РЅРёРµ РЅР°С‡Р°Р»Р° СЃР»РµРґСѓСЋС‰РµРіРѕ С†РёРєР»Р°
+        //СЌС‚Р° С‡Р°СЃС‚СЊ РєРѕРґР° РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ СЂР°Р· РІ MAIN_CYCLE_TIME
+        while (!LL_ADC_IsActiveFlag_EOS(ADC1))                                  //РґРѕР¶РґР°С‚СЊСЃСЏ РѕРєРѕРЅС‡Р°РЅРёСЏ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ РђР¦Рџ
             __no_operation();
-        LL_ADC_ClearFlag_EOS(ADC1);                                             //сбросит нужно руками флаг
-        adc_data = LL_ADC_REG_ReadConversionData32(ADC1);                       //считать данные из АЦП
-        LL_ADC_REG_StartConversion(ADC1);                                       //Перезапустить новый опрос АЦП
+        LL_ADC_ClearFlag_EOS(ADC1);                                             //СЃР±СЂРѕСЃРёС‚ РЅСѓР¶РЅРѕ СЂСѓРєР°РјРё С„Р»Р°Рі
+        adc_data = LL_ADC_REG_ReadConversionData32(ADC1);                       //СЃС‡РёС‚Р°С‚СЊ РґР°РЅРЅС‹Рµ РёР· РђР¦Рџ
+        LL_ADC_REG_StartConversion(ADC1);                                       //РџРµСЂРµР·Р°РїСѓСЃС‚РёС‚СЊ РЅРѕРІС‹Р№ РѕРїСЂРѕСЃ РђР¦Рџ
         
         is_input_valve_open = !LL_GPIO_IsInputPinSet (GPIOD, LL_GPIO_PIN_15);
         is_output_valve_open = !LL_GPIO_IsInputPinSet (GPIOD, LL_GPIO_PIN_14);
@@ -277,7 +277,7 @@ int main(void)
         LL_DAC_ConvertData12RightAligned(DAC, LL_DAC_CHANNEL_1, dac_val);
         
         if(samovar.v < 0.0001)
-            is_output_valve_open = false;                                       //коли в самоваре пусто - в чашку не лить!
+            is_output_valve_open = false;                                       //РєРѕР»Рё РІ СЃР°РјРѕРІР°СЂРµ РїСѓСЃС‚Рѕ - РІ С‡Р°С€РєСѓ РЅРµ Р»РёС‚СЊ!
         out_streamlet.cycle(is_output_valve_open, samovar.temp);
         cup.cycle(is_output_valve_open, is_cup_sink, 0, samovar.temp);
         cup_led.cycle(cup.v, cup.temp);
@@ -285,7 +285,7 @@ int main(void)
         if(led_redraw_ctr <= 0)
         {
             led_redraw_ctr = 30;       //10mS
-            DMA1_Stream7_Mem_to_TMR2_restart();                                 //обновить светодиоды
+            DMA1_Stream7_Mem_to_TMR2_restart();                                 //РѕР±РЅРѕРІРёС‚СЊ СЃРІРµС‚РѕРґРёРѕРґС‹
         }
         
     /* USER CODE END WHILE */
@@ -390,7 +390,7 @@ static void MX_ADC_Init(void)
   ADC_InitStruct.LowPowerMode = LL_ADC_LP_MODE_NONE;
   LL_ADC_Init(ADC1, &ADC_InitStruct);
   /* USER CODE BEGIN ADC_Init 2 */
-  //  ADC1_COMMON->CCR |= ADC_CR_ADVREGEN;    //внутренняя опора
+  //  ADC1_COMMON->CCR |= ADC_CR_ADVREGEN;    //РІРЅСѓС‚СЂРµРЅРЅСЏСЏ РѕРїРѕСЂР°
   /* USER CODE END ADC_Init 2 */
 
 }

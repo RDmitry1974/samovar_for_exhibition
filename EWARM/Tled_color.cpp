@@ -11,7 +11,7 @@ const unsigned short ONE_VAL = 26;
 const unsigned short NULL_VAL = 13;
 //const int Tcommon :: T1 = (Twater_obj::T_MAX - Twater_obj::T_MIN) / (1 + Tled_color::MAX_YELLOW_TONE / (Tled_color::MAX_TONE - Tled_color::MIN_BLUE_TONE));
 // ----------------------------------------------------------------------------
-volatile unsigned char brite = 1;               //шоб в отладчике можно было яркость крутить
+volatile unsigned char brite = 1;               //С€РѕР± РІ РѕС‚Р»Р°РґС‡РёРєРµ РјРѕР¶РЅРѕ Р±С‹Р»Рѕ СЏСЂРєРѕСЃС‚СЊ РєСЂСѓС‚РёС‚СЊ
 
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
@@ -61,28 +61,28 @@ void Tled_color :: init_leds()
 }
 
 // ----------------------------------------------------------------------------
-// Рассчет цвета СД от температуры
+// Р Р°СЃСЃС‡РµС‚ С†РІРµС‚Р° РЎР” РѕС‚ С‚РµРјРїРµСЂР°С‚СѓСЂС‹
 // ----------------------------------------------------------------------------
 unsigned char Tcommon :: calc_tone(float temp)
 {
-    unsigned char satur;                                                        //насыщенность СД в HSV
+    unsigned char satur;                                                        //РЅР°СЃС‹С‰РµРЅРЅРѕСЃС‚СЊ РЎР” РІ HSV
     
     if(temp < Twater_obj::T_MIN)
-        satur = Tled_color::MAX_SATURATION;                                     //максимально холодный цвет
+        satur = Tled_color::MAX_SATURATION;                                     //РјР°РєСЃРёРјР°Р»СЊРЅРѕ С…РѕР»РѕРґРЅС‹Р№ С†РІРµС‚
     else if(temp > Twater_obj::T_MAX)       
-        satur = 1;                                                              //максимально горячий цвет
+        satur = 1;                                                              //РјР°РєСЃРёРјР°Р»СЊРЅРѕ РіРѕСЂСЏС‡РёР№ С†РІРµС‚
     else       
         satur = lround(Tled_color::MAX_SATURATION - (temp - Twater_obj::T_MIN) * (Tled_color::MAX_SATURATION - 1) / (Twater_obj::T_MAX - Twater_obj::T_MIN)); 
     return satur;
 }
 /*unsigned char Tcommon :: calc_tone(float temp)
 {
-    unsigned char tone;                                                        //тон свечения СД в HSV
+    unsigned char tone;                                                        //С‚РѕРЅ СЃРІРµС‡РµРЅРёСЏ РЎР” РІ HSV
     
     if(temp < Twater_obj::T_MIN)
-        tone = Tled_color::MIN_BLUE_TONE;                                   //максимально холодный цвет
+        tone = Tled_color::MIN_BLUE_TONE;                                   //РјР°РєСЃРёРјР°Р»СЊРЅРѕ С…РѕР»РѕРґРЅС‹Р№ С†РІРµС‚
     else if(temp > Twater_obj::T_MAX)       
-        tone = Tled_color::MAX_TONE;                                 //максимально горячий цвет
+        tone = Tled_color::MAX_TONE;                                 //РјР°РєСЃРёРјР°Р»СЊРЅРѕ РіРѕСЂСЏС‡РёР№ С†РІРµС‚
     else       
         tone = lround(Tled_color::MIN_BLUE_TONE + (temp - Twater_obj::T_MIN) * (Tled_color::MAX_TONE - Tled_color::MIN_BLUE_TONE) / (Twater_obj::T_MAX - Twater_obj::T_MIN)); 
     return tone;
@@ -95,7 +95,7 @@ void Tstreamlet :: init()
 }
 
 // ----------------------------------------------------------------------------
-// Рассчитывает насыщенность для эффекта протекания жижи
+// Р Р°СЃСЃС‡РёС‚С‹РІР°РµС‚ РЅР°СЃС‹С‰РµРЅРЅРѕСЃС‚СЊ РґР»СЏ СЌС„С„РµРєС‚Р° РїСЂРѕС‚РµРєР°РЅРёСЏ Р¶РёР¶Рё
 // ----------------------------------------------------------------------------
 unsigned char  Tstreamlet :: calc_saturatin_move_effect(int val)
 {
@@ -107,7 +107,7 @@ unsigned char  Tstreamlet :: calc_saturatin_move_effect(int val)
         return (unsigned char)val;
 }
 // ----------------------------------------------------------------------------
-// Цикл протекания жижи
+// Р¦РёРєР» РїСЂРѕС‚РµРєР°РЅРёСЏ Р¶РёР¶Рё
 // ----------------------------------------------------------------------------
 void Tstreamlet :: cycle(bool is_flow, float temp)
 {
@@ -116,7 +116,7 @@ void Tstreamlet :: cycle(bool is_flow, float temp)
     cycle_time_ctr -= MAIN_CYCLE_TIME;
     if(cycle_time_ctr > 0)
         return;
-    cycle_time_ctr = 150;                              // периодичность обслуживания этой сущности
+    cycle_time_ctr = 150;                              // РїРµСЂРёРѕРґРёС‡РЅРѕСЃС‚СЊ РѕР±СЃР»СѓР¶РёРІР°РЅРёСЏ СЌС‚РѕР№ СЃСѓС‰РЅРѕСЃС‚Рё
     general_tone = calc_tone(temp);
     if(is_flow)
         brite_tmp = brite;
@@ -128,7 +128,7 @@ void Tstreamlet :: cycle(bool is_flow, float temp)
         led_dim[begin_led + k].val.h = Tled_color::MIN_BLUE_TONE;//general_tone;
         led_dim[begin_led + k].val.s = general_tone;//15;
     }
-    //шоб несколько светодиодиков бегали с шагом в 6 шт.
+    //С€РѕР± РЅРµСЃРєРѕР»СЊРєРѕ СЃРІРµС‚РѕРґРёРѕРґРёРєРѕРІ Р±РµРіР°Р»Рё СЃ С€Р°РіРѕРј РІ 6 С€С‚.
     for (int tmp_pos = num_led - 1 - front_pos; tmp_pos >= 0; tmp_pos -= 6)
     {
         led_dim[begin_led + tmp_pos].val.s = calc_saturatin_move_effect(general_tone - 9);
@@ -136,7 +136,7 @@ void Tstreamlet :: cycle(bool is_flow, float temp)
             led_dim[begin_led + tmp_pos + 1].val.s = calc_saturatin_move_effect(general_tone - 7);
         if((tmp_pos + 2) < num_led)
             led_dim[begin_led + tmp_pos + 2].val.s = calc_saturatin_move_effect(general_tone - 5);
- /*     это для случая когда от тепмературы меняется тон СД  
+ /*     СЌС‚Рѕ РґР»СЏ СЃР»СѓС‡Р°СЏ РєРѕРіРґР° РѕС‚ С‚РµРїРјРµСЂР°С‚СѓСЂС‹ РјРµРЅСЏРµС‚СЃСЏ С‚РѕРЅ РЎР”  
         led_dim[begin_led + tmp_pos].val.s = 6;
         if((tmp_pos + 1) < num_led)
             led_dim[begin_led + tmp_pos + 1].val.s = 8;
@@ -155,12 +155,12 @@ void Tstreamlet :: cycle(bool is_flow, float temp)
 }
 
 // ----------------------------------------------------------------------------
-// задание массива пузырьков. Номер начального СД и строка в котором он расположен
+// Р·Р°РґР°РЅРёРµ РјР°СЃСЃРёРІР° РїСѓР·С‹СЂСЊРєРѕРІ. РќРѕРјРµСЂ РЅР°С‡Р°Р»СЊРЅРѕРіРѕ РЎР” Рё СЃС‚СЂРѕРєР° РІ РєРѕС‚РѕСЂРѕРј РѕРЅ СЂР°СЃРїРѕР»РѕР¶РµРЅ
 // ----------------------------------------------------------------------------
 Tbubble Tcontainer :: bubbles_strims[MAX_BUBBLES_STRIMS];// = {Tbubble()};
 
 // ----------------------------------------------------------------------------
-// координаты начал движения пузырька
+// РєРѕРѕСЂРґРёРЅР°С‚С‹ РЅР°С‡Р°Р» РґРІРёР¶РµРЅРёСЏ РїСѓР·С‹СЂСЊРєР°
 // ----------------------------------------------------------------------------
 Tstart_coordinate Tcontainer :: start_coordinate[] = {{0, 0},  {1, 0},  {2, 0},  {3, 0}, {4, 0}, 
                                                       {5, 1},  {6, 1},  {12, 1},  {13, 1}, 
@@ -176,7 +176,7 @@ void Tcontainer :: init()
 }
 
 // ----------------------------------------------------------------------------
-// Рассчет числа строк СД от объема
+// Р Р°СЃСЃС‡РµС‚ С‡РёСЃР»Р° СЃС‚СЂРѕРє РЎР” РѕС‚ РѕР±СЉРµРјР°
 // ----------------------------------------------------------------------------
 unsigned char Tcontainer :: calc_line_index(float v)
 {
@@ -184,46 +184,46 @@ unsigned char Tcontainer :: calc_line_index(float v)
     
     nl = lround(v * (num_led_line) / maxv);
     if(nl > num_led_line)
-        nl = num_led_line;  //на одну строчку боле. Ибо нулевой индекс - 0 зажженных СИД
+        nl = num_led_line;  //РЅР° РѕРґРЅСѓ СЃС‚СЂРѕС‡РєСѓ Р±РѕР»Рµ. РР±Рѕ РЅСѓР»РµРІРѕР№ РёРЅРґРµРєСЃ - 0 Р·Р°Р¶Р¶РµРЅРЅС‹С… РЎРР”
     return (unsigned char)nl;
 }
 
 // ----------------------------------------------------------------------------
-// Цикл объемов с жидкостью
+// Р¦РёРєР» РѕР±СЉРµРјРѕРІ СЃ Р¶РёРґРєРѕСЃС‚СЊСЋ
 // ----------------------------------------------------------------------------
 void Tcontainer :: cycle(float v, float temp)
 {
-    unsigned char general_tone;                 // тон свечения СД в HSV
+    unsigned char general_tone;                 // С‚РѕРЅ СЃРІРµС‡РµРЅРёСЏ РЎР” РІ HSV
     
     cycle_time_ctr -= MAIN_CYCLE_TIME;
     if(cycle_time_ctr > 0)
         return;
-    cycle_time_ctr = 200;//period;                      // периодичность обслуживания этой сущности
-    general_tone = calc_tone(temp);                     //рассчет насыщенности СД от температуры
-    line_index = calc_line_index(v);                    //рассчет индекса числа СД от объема
+    cycle_time_ctr = 200;//period;                      // РїРµСЂРёРѕРґРёС‡РЅРѕСЃС‚СЊ РѕР±СЃР»СѓР¶РёРІР°РЅРёСЏ СЌС‚РѕР№ СЃСѓС‰РЅРѕСЃС‚Рё
+    general_tone = calc_tone(temp);                     //СЂР°СЃСЃС‡РµС‚ РЅР°СЃС‹С‰РµРЅРЅРѕСЃС‚Рё РЎР” РѕС‚ С‚РµРјРїРµСЂР°С‚СѓСЂС‹
+    line_index = calc_line_index(v);                    //СЂР°СЃСЃС‡РµС‚ РёРЅРґРµРєСЃР° С‡РёСЃР»Р° РЎР” РѕС‚ РѕР±СЉРµРјР°
     
 #ifdef IZVRAT_MIRROR_LEDS
     for(int k = num_led - *(led_tbl + line_index); k < num_led; ++k)
-    {   // зажечь нужные СД
+    {   // Р·Р°Р¶РµС‡СЊ РЅСѓР¶РЅС‹Рµ РЎР”
         led_dim[begin_led + k].val.v = brite;
         led_dim[begin_led + k].val.h = Tled_color::MIN_BLUE_TONE;//general_tone;
         led_dim[begin_led + k].val.s = general_tone;//15;
     }
     for(int k = 0; k < num_led - *(led_tbl + line_index); ++k)
-    {   // потушить НЕ нужные СД
+    {   // РїРѕС‚СѓС€РёС‚СЊ РќР• РЅСѓР¶РЅС‹Рµ РЎР”
         led_dim[begin_led + k].val.v = 0;
         led_dim[begin_led + k].val.h = 0;
         led_dim[begin_led + k].val.s = 0;
     }
 #else
     for(int k = 0; k < *(led_tbl + line_index); ++k)
-    {   // зажечь нужные СД
+    {   // Р·Р°Р¶РµС‡СЊ РЅСѓР¶РЅС‹Рµ РЎР”
         led_dim[begin_led + k].val.v = brite;
         led_dim[begin_led + k].val.h = general_tone;
         led_dim[begin_led + k].val.s = 15;
     }
     for(int k = *(led_tbl + line_index); k < num_led; ++k)
-    {   // потушить НЕ нужные СД
+    {   // РїРѕС‚СѓС€РёС‚СЊ РќР• РЅСѓР¶РЅС‹Рµ РЎР”
         led_dim[begin_led + k].val.v = 0;
         led_dim[begin_led + k].val.h = 0;
         led_dim[begin_led + k].val.s = 0;

@@ -23,7 +23,7 @@ void Tcoals :: init()
     }
 }
 // ----------------------------------------------------------------------------
-// Öèêë ìåðöàíèÿ óãëåé
+// Ð¦Ð¸ÐºÐ» Ð¼ÐµÑ€Ñ†Ð°Ð½Ð¸Ñ ÑƒÐ³Ð»ÐµÐ¹
 // ----------------------------------------------------------------------------
 void Tcoals :: cycle(int adc_data)
 {
@@ -31,7 +31,7 @@ void Tcoals :: cycle(int adc_data)
     cycle_time_ctr -= MAIN_CYCLE_TIME;
     if(cycle_time_ctr > 0)
         return;
-    cycle_time_ctr = 40;                        // ïåðèîäè÷íîñòü îáñëóæèâàíèÿ ýòîé ñóùíîñòè
+    cycle_time_ctr = 40;                        // Ð¿ÐµÑ€Ð¸Ð¾Ð´Ð¸Ñ‡Ð½Ð¾ÑÑ‚ÑŒ Ð¾Ð±ÑÐ»ÑƒÐ¶Ð¸Ð²Ð°Ð½Ð¸Ñ ÑÑ‚Ð¾Ð¹ ÑÑƒÑ‰Ð½Ð¾ÑÑ‚Ð¸
     int brite = (adc_data + 140 - ADC_4mA_VALUE) * Tled_color::MAX_BRIHTNES / (ADC_20mA_VALUE - ADC_4mA_VALUE);
     if (brite > Tled_color::MAX_BRIHTNES)
         brite = Tled_color::MAX_BRIHTNES;
@@ -54,14 +54,14 @@ void Tcoals :: cycle(int adc_data)
         if(led_state[k].is_light)
         {
             if(led_state[k].is_up_tone)
-            {   //íàðàùèâàåì òîí
+            {   //Ð½Ð°Ñ€Ð°Ñ‰Ð¸Ð²Ð°ÐµÐ¼ Ñ‚Ð¾Ð½
                 if(led_state[k].tone >= led_state[k].tone_max)
-                    led_state[k].is_up_tone = false;    //õîðîø! Ïîøëè òåïåðü âíèç
+                    led_state[k].is_up_tone = false;    //Ñ…Ð¾Ñ€Ð¾Ñˆ! ÐŸÐ¾ÑˆÐ»Ð¸ Ñ‚ÐµÐ¿ÐµÑ€ÑŒ Ð²Ð½Ð¸Ð·
                 else
                     led_dim[BEGIN_LED + k].val.h = ++led_state[k].tone;
             }
             else
-            {   //òóøèì òîí
+            {   //Ñ‚ÑƒÑˆÐ¸Ð¼ Ñ‚Ð¾Ð½
                 if(led_state[k].tone > 0)
                     led_dim[BEGIN_LED + k].val.h = --led_state[k].tone;
                 else
